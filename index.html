@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Get the YouTube Video ID from all the valid YouTube URLs.</title>
+	<style>
+		body {
+			text-align: -webkit-center;
+			text-align: center;
+		}
+
+		.myinput {
+			width: 80%;
+			margin: 0 auto;
+		}
+
+		#home {
+			cursor: pointer;
+			color: black;
+			text-shadow: 1px 1px 1px red, -1px -1px 1px #00ff08;
+		}
+	</style>
+</head>
+
+<body>
+	
+	<script>
+
+		let vidurl = [
+			'http://www.youtube.com/oembed?url=http%3A//www.youtube.com/watch?v%3D-wtIMTCHWuI&format=json',//
+			'http://www.youtube.com/attribution_link?a=JdfC0C9V6ZI&u=%2Fwatch%3Fv%3DEhxJLojIE_o%26feature%3Dshare',//
+			'https://www.youtube.com/attribution_link?a=8g8kPrPIi-ecwIsS&u=/watch%3Fv%3DyZv2daTWRZU%26feature%3Dem-uploademail',//
+			'//www.youtube-nocookie.com/embed/up_lNV-yoK4?rel=0',//
+			'https://www.youtube-nocookie.com/embed/up_lNV-yoK4?rel=0',//
+			'https://www.youtube.com/v/0zM3nApSvMg?fs=1&amp;hl=en_US&amp;rel=0',//
+			'http://www.youtube.com/v/0zM3nApSvMg?fs=1&hl=en_US&rel=0',//
+			'http://www.youtube.com/v/dQw4w9WgXcQ',//
+			'http://youtube.com/v/dQw4w9WgXcQ?feature=youtube_gdata_player',//
+			'http://www.youtube.com/v/-wtIMTCHWuI?version=3&autohide=1',//
+			'http://www.youtube.com/e/dQw4w9WgXcQ',//
+			'http://www.youtube.com/watch?feature=player_embedded&v=dQw4w9WgXcQ',//
+			'http://www.youtube.com/?feature=player_embedded&v=dQw4w9WgXcQ',//
+			'http://www.youtube-nocookie.com/v/6L3ZvIMwZFM?version=3&hl=en_US&rel=0',//
+			'https://youtu.be/oTJRivZTMLs?list=PLToa5JuFMsXTNkrLJbRlB--76IAOjRM9b',//
+			'http://youtu.be/oTJRivZTMLs&feature=channel',//
+			'http://youtu.be/dQw4w9WgXcQ?feature=youtube_gdata_player',//
+			'http://youtu.be/-wtIMTCHWuI',//
+			'http://youtu.be/watch?v=-wtIMTCHWuI',//
+			'http://www.youtube.com/ytscreeningroom?v=oTJRivZTMLs',//
+			'http://www.youtube.com/embed/oTJRivZTMLs?rel=0',//
+			'https://www.youtube.com/embed/0zM3nApSvMg?rel=0',//
+			'http://www.youtube.com/embed/nas1rJpm7wY?rel=0',//
+			'http://www.youtube.com/embed/dQw4w9WgXcQ',//
+			'http://youtube.com/vi/oTJRivZTMLs&feature=channel',//
+			'http://youtube.com/vi/dQw4w9WgXcQ?feature=youtube_gdata_player',//
+			'http://www.youtube.com/?v=dQw4w9WgXcQ',//
+			'http://youtube.com/?v=dQw4w9WgXcQ&feature=youtube_gdata_player',//
+			'http://youtube.com/?v=oTJRivZTMLs&feature=channel',//
+			'http://youtube.com/?feature=channel&v=oTJRivZTMLs',//
+			'http://youtube.com/?vi=oTJRivZTMLs&feature=channel',//
+			'http://youtube.com/?vi=dQw4w9WgXcQ&feature=youtube_gdata_player',//
+			'http://youtube.com/watch?vi=oTJRivZTMLs&feature=channel', //
+			'http://youtube.com/watch?vi=dQw4w9WgXcQ&feature=youtube_gdata_player',//
+			'https://m.youtube.com/watch?v=m_kbvp0_8tc',//
+			'http://www.youtube.com/watch?v=oTJRivZTMLs&feature=youtu.be',//
+			'http://youtube.com/watch?v=oTJRivZTMLs&feature=channel',//
+			'http://www.youtube.com/watch?v=6dwqZw0j_jY&feature=youtu.be',//
+			'https://www.youtube.com/watch?v=yZv2daTWRZU&feature=em-uploademail',//
+			'https://www.youtube.com/watch?v=0zM3nApSvMg&feature=feedrec_grec_index',//
+			'http://www.youtube.com/watch?v=6dwqZw0j_jY&feature=youtu.be',//
+			'https://www.youtube.com/watch?v=yZv2daTWRZU&feature=em-uploademail',//
+			'https://www.youtube.com/watch?v=0zM3nApSvMg&feature=feedrec_grec_index',//
+			'http://www.youtube.com/watch?v=-wtIMTCHWuI',//
+			'https://www.youtube.com/watch?v=0zM3nApSvMg#t=0m10s',//
+			'http://www.youtube.com/watch?v=cKZDdG9FTKY&feature=channel',//
+			'http://www.youtube.com/watch?v=yZ-K7nCVnBI&playnext_from=TL&videos=osPknwzXEas&feature=sub',//
+			'https://www.youtube.com/watch?v=peFZbP64dsU',//
+			'http://www.youtube.com/watch?v=dQw4w9WgXcQ&feature=youtube_gdata_player',//
+			'http://youtube.com/watch?v=dQw4w9WgXcQ&feature=youtube_gdata_player',//
+			'http://www.youtube.com/watch?v=-wtIMTCHWuI',//
+			'https://www.youtube.com/watch?v=0zM3nApSvMg#t=0m10s',//
+			'http://www.youtube.com/watch?v=cKZDdG9FTKY&feature=channel',//
+			'http://www.youtube.com/watch?v=yZ-K7nCVnBI&playnext_from=TL&videos=osPknwzXEas&feature=sub',//
+			'https://www.youtube.com/watch?v=peFZbP64dsU',//
+			'http://www.youtube.com/watch?v=dQw4w9WgXcQ&feature=youtube_gdata_player',//
+			'http://youtube.com/watch?v=dQw4w9WgXcQ&feature=youtube_gdata_player',//
+			'http://www.youtube.com/watch?v=0zM3nApSvMg&feature=feedrec_grec_index',//
+			'http://www.youtube.com/watch?v=0zM3nApSvMg#t=0m10s',//
+			'https://www.youtube.com/watch?v=ishbTyLs6ps&list=PLGup6kBfcU7Le5laEaCLgTKtlDcxMqGxZ&index=106&shuffle=2655',//
+		];
+		if (window.location.search.indexOf('?url=') == 0) {
+			apifun();
+		} else if (window.location.search.indexOf('?supported') == 0) {
+			let bgclr = [
+				' style="background: #00ff1f;"',
+				' style="background: red;"',
+				' style="background: yellow;"',
+				' style="background: pink;"',
+				' style="background: #00ffff;"',
+				' style="background: #c000ff;"',
+				' style="background: green;"',
+				' style="background: #ff00eb;"',
+			]
+			document.querySelector('html').innerHTML = '';
+			let allsupurls = -1;
+			let clrnmbrs = -1;
+			let selbgclr;
+			let allsupurl = setInterval(() => {
+				allsupurls += 1;
+				clrnmbrs += 1;
+				if (vidurl.length == allsupurls) {
+					clearInterval(allsupurl);
+					document.querySelector('body').innerHTML = document.querySelector('body').innerHTML + '<div style="font-size: large;font-family: monospace;text-align: center;background: black;color: red;margin-top: 10px;padding: 5px;text-shadow: 1px 1px 2px white, -1px -1px 2px #fbff00;">Powered by Letslearnlights</div>';
+				} else {
+					if (bgclr.length == clrnmbrs) {
+						clrnmbrs = -1;
+					} else {
+						selbgclr = bgclr[clrnmbrs];
+					}
+					if (allsupurls < 9) {
+						allsupurlindex = '0' + (allsupurls + 1);
+					} else {
+						allsupurlindex = allsupurls + 1;
+					}
+					document.querySelector('body').innerHTML = document.querySelector('body').innerHTML + '<span' + selbgclr + '>' + allsupurlindex + ' - ' + vidurl[allsupurls] + '</span>' + '<br>';
+				}
+			}, 50);
+		}
+		else {
+			document.querySelector('body').innerHTML = '<a href=""> <h2 id="home">Get the YouTube Video ID from all the valid YouTube URLs.</h2> </a> <input class="myinput" id="myinput" type="myinput" placeholder="Please type here..."> <span><button id="go-to-fetch">Go!</button></span> <br /> <output id="output"></output><br><br><br><br><br><hr><div><a href="?supported" target="blank">Supported URLs</a></div><hr><a href="https://letslearnlights.blogspot.com/" target="blank"><div style="font-size: large;font-family: monospace;text-align: center;background: black;color: red;margin-top: 10px;padding: 5px;text-shadow: 1px 1px 2px white, -1px -1px 2px #fbff00;cursor: pointer;">Powered by Letslearnlights</div></a>';
+			bodyfun();
+		}
+
+		function bodyfun() {
+
+			let inputvidurl;
+			let arryvidurl;// = vidurl;
+
+			document.getElementById('myinput').oninput = function () {
+				inputvidurl = document.getElementById('myinput').value;
+			}
+
+			document.getElementById('go-to-fetch').onclick = function () {
+				if (inputvidurl != undefined || arryvidurl != undefined) {
+					// let userurl = arryvidurl[Math.floor(Math.random() * arryvidurl.length)]
+					let userurl = inputvidurl;
+					let vidid;
+
+					// Condition 1
+					if (userurl.split("youtube.com/watch?v=")[1] != undefined) {
+						vidid = userurl.split("youtube.com/watch?v=")[1].substring(0, 11);
+					}
+					// Condition 2
+					else if (userurl.split("youtube.com/watch?vi=")[1] != undefined) {
+						vidid = userurl.split("youtube.com/watch?vi=")[1].substring(0, 11);
+					}
+					// Condition 3
+					else if (userurl.split("youtube.com/?vi=")[1] != undefined) {
+						vidid = userurl.split("youtube.com/?vi=")[1].substring(0, 11);
+					}
+					// Condition 4
+					else if (userurl.split("youtube.com/?feature=channel&v=")[1] != undefined) {
+						vidid = userurl.split("youtube.com/?feature=channel&v=")[1].substring(0, 11);
+					}
+					// Condition 5
+					else if (userurl.split("youtube.com/?v=")[1] != undefined) {
+						vidid = userurl.split("youtube.com/?v=")[1].substring(0, 11);
+					}
+					// Condition 6
+					else if (userurl.split("youtube.com/vi/")[1] != undefined) {
+						vidid = userurl.split("youtube.com/vi/")[1].substring(0, 11);
+					}
+					// Condition 7
+					else if (userurl.split("youtube.com/embed/")[1] != undefined) {
+						vidid = userurl.split("youtube.com/embed/")[1].substring(0, 11);
+					}
+					// Condition 8
+					else if (userurl.split("youtube-nocookie.com/embed/")[1] != undefined) {
+						vidid = userurl.split("youtube-nocookie.com/embed/")[1].substring(0, 11);
+					}
+					// Condition 9
+					else if (userurl.split("youtube.com/ytscreeningroom?v=")[1] != undefined) {
+						vidid = userurl.split("youtube.com/ytscreeningroom?v=")[1].substring(0, 11);
+					}
+					// Condition 10
+					else if (userurl.split("youtu.be/watch?v=")[1] != undefined) {
+						vidid = userurl.split("youtu.be/watch?v=")[1].substring(0, 11);
+					}
+					// Condition 11
+					else if (userurl.split("youtu.be/")[1] != undefined) {
+						vidid = userurl.split("youtu.be/")[1].substring(0, 11);
+					}
+					// Condition 12
+					else if (userurl.split("youtube-nocookie.com/v/")[1] != undefined) {
+						vidid = userurl.split("youtube-nocookie.com/v/")[1].substring(0, 11);
+					}
+					// Condition 13
+					else if (userurl.split("youtube.com/watch?feature=player_embedded&v=")[1] != undefined) {
+						vidid = userurl.split("youtube.com/watch?feature=player_embedded&v=")[1].substring(0, 11);
+					}
+					// Condition 14
+					else if (userurl.split("youtube.com/?feature=player_embedded&v=")[1] != undefined) {
+						vidid = userurl.split("youtube.com/?feature=player_embedded&v=")[1].substring(0, 11);
+					}
+					// Condition 15
+					else if (userurl.split("youtube.com?feature=player_embedded&v=")[1] != undefined) {
+						vidid = userurl.split("youtube.com?feature=player_embedded&v=")[1].substring(0, 11);
+					}
+					// Condition 16
+					else if (userurl.split("youtube.com/e/")[1] != undefined) {
+						vidid = userurl.split("youtube.com/e/")[1].substring(0, 11);
+					}
+					// Condition 17
+					else if (userurl.split("youtube.com/v/")[1] != undefined) {
+						vidid = userurl.split("youtube.com/v/")[1].substring(0, 11);
+					}
+					// Condition 18
+					else if (userurl.split("youtube.com/attribution_link?a=8g8kPrPIi-ecwIsS&u=/watch%3Fv%3D")[1] != undefined) {
+						vidid = userurl.split("youtube.com/attribution_link?a=8g8kPrPIi-ecwIsS&u=/watch%3Fv%3D")[1].substring(0, 11);
+					}
+					// Condition 19
+					else if (userurl.split("youtube.com/attribution_link?a=JdfC0C9V6ZI&u=%2Fwatch%3Fv%3D")[1] != undefined) {
+						vidid = userurl.split("youtube.com/attribution_link?a=JdfC0C9V6ZI&u=%2Fwatch%3Fv%3D")[1].substring(0, 11);
+					}
+					// Condition 20
+					else if (userurl.split("youtube.com/oembed?url=http%3A//www.youtube.com/watch?v%3D")[1] != undefined) {
+						vidid = userurl.split("youtube.com/oembed?url=http%3A//www.youtube.com/watch?v%3D")[1].substring(0, 11);
+					}
+					// Condition 1
+					//else if (userurl.split("")[1] != undefined) {
+					//	vidid = userurl.split("")[1].substring(0, 11);
+					//}
+					// Condition false
+					else {
+						vidid = 'Invalid input';
+					}
+
+					let vidid_and_lenght;
+					if (vidid.length == 8) {
+						vidid_and_lenght = vidid
+					} else {
+						vidid_and_lenght = vidid + ' - ' + vidid.length
+					}
+
+					if (vidid=="Invalid input"){
+					document.getElementById('output').innerHTML = '<br>'+vidid;
+					}else{
+					document.getElementById('output').innerHTML = '<br>'+vidid+'<hr><a href="?url='+userurl+'" target=blank>Direct URL</a>';     // return only id
+					}
+					
+					//document.getElementById('output').innerHTML = vidid_and_lenght;     // return id with length of id
+
+				}
+			}
+		}
+		function apifun() {
+
+			let inputvidurl = window.location.search.substr(5);
+			let arryvidurl;// = vidurl;
+
+			if (inputvidurl != undefined || arryvidurl != undefined) {
+				let userurl = inputvidurl;
+				let vidid;
+
+				// Condition 1
+				if (userurl.split("youtube.com/watch?v=")[1] != undefined) {
+					vidid = userurl.split("youtube.com/watch?v=")[1].substring(0, 11);
+				}
+				// Condition 2
+				else if (userurl.split("youtube.com/watch?vi=")[1] != undefined) {
+					vidid = userurl.split("youtube.com/watch?vi=")[1].substring(0, 11);
+				}
+				// Condition 3
+				else if (userurl.split("youtube.com/?vi=")[1] != undefined) {
+					vidid = userurl.split("youtube.com/?vi=")[1].substring(0, 11);
+				}
+				// Condition 4
+				else if (userurl.split("youtube.com/?feature=channel&v=")[1] != undefined) {
+					vidid = userurl.split("youtube.com/?feature=channel&v=")[1].substring(0, 11);
+				}
+				// Condition 5
+				else if (userurl.split("youtube.com/?v=")[1] != undefined) {
+					vidid = userurl.split("youtube.com/?v=")[1].substring(0, 11);
+				}
+				// Condition 6
+				else if (userurl.split("youtube.com/vi/")[1] != undefined) {
+					vidid = userurl.split("youtube.com/vi/")[1].substring(0, 11);
+				}
+				// Condition 7
+				else if (userurl.split("youtube.com/embed/")[1] != undefined) {
+					vidid = userurl.split("youtube.com/embed/")[1].substring(0, 11);
+				}
+				// Condition 8
+				else if (userurl.split("youtube-nocookie.com/embed/")[1] != undefined) {
+					vidid = userurl.split("youtube-nocookie.com/embed/")[1].substring(0, 11);
+				}
+				// Condition 9
+				else if (userurl.split("youtube.com/ytscreeningroom?v=")[1] != undefined) {
+					vidid = userurl.split("youtube.com/ytscreeningroom?v=")[1].substring(0, 11);
+				}
+				// Condition 10
+				else if (userurl.split("youtu.be/watch?v=")[1] != undefined) {
+					vidid = userurl.split("youtu.be/watch?v=")[1].substring(0, 11);
+				}
+				// Condition 11
+				else if (userurl.split("youtu.be/")[1] != undefined) {
+					vidid = userurl.split("youtu.be/")[1].substring(0, 11);
+				}
+				// Condition 12
+				else if (userurl.split("youtube-nocookie.com/v/")[1] != undefined) {
+					vidid = userurl.split("youtube-nocookie.com/v/")[1].substring(0, 11);
+				}
+				// Condition 13
+				else if (userurl.split("youtube.com/watch?feature=player_embedded&v=")[1] != undefined) {
+					vidid = userurl.split("youtube.com/watch?feature=player_embedded&v=")[1].substring(0, 11);
+				}
+				// Condition 14
+				else if (userurl.split("youtube.com/?feature=player_embedded&v=")[1] != undefined) {
+					vidid = userurl.split("youtube.com/?feature=player_embedded&v=")[1].substring(0, 11);
+				}
+				// Condition 15
+				else if (userurl.split("youtube.com?feature=player_embedded&v=")[1] != undefined) {
+					vidid = userurl.split("youtube.com?feature=player_embedded&v=")[1].substring(0, 11);
+				}
+				// Condition 16
+				else if (userurl.split("youtube.com/e/")[1] != undefined) {
+					vidid = userurl.split("youtube.com/e/")[1].substring(0, 11);
+				}
+				// Condition 17
+				else if (userurl.split("youtube.com/v/")[1] != undefined) {
+					vidid = userurl.split("youtube.com/v/")[1].substring(0, 11);
+				}
+				// Condition 18
+				else if (userurl.split("youtube.com/attribution_link?a=8g8kPrPIi-ecwIsS&u=/watch%3Fv%3D")[1] != undefined) {
+					vidid = userurl.split("youtube.com/attribution_link?a=8g8kPrPIi-ecwIsS&u=/watch%3Fv%3D")[1].substring(0, 11);
+				}
+				// Condition 19
+				else if (userurl.split("youtube.com/attribution_link?a=JdfC0C9V6ZI&u=%2Fwatch%3Fv%3D")[1] != undefined) {
+					vidid = userurl.split("youtube.com/attribution_link?a=JdfC0C9V6ZI&u=%2Fwatch%3Fv%3D")[1].substring(0, 11);
+				}
+				// Condition 20
+				else if (userurl.split("youtube.com/oembed?url=http%3A//www.youtube.com/watch?v%3D")[1] != undefined) {
+					vidid = userurl.split("youtube.com/oembed?url=http%3A//www.youtube.com/watch?v%3D")[1].substring(0, 11);
+				}
+				// Condition 1
+				//else if (userurl.split("")[1] != undefined) {
+				//	vidid = userurl.split("")[1].substring(0, 11);
+				//}
+				// Condition false
+				else {
+					vidid = 'Invalid input';
+				}
+
+				document.querySelector('html').innerHTML = vidid;
+
+			}
+		}
+	</script>
+</body>
+
+</html>
